@@ -36,3 +36,36 @@ export const getCurrentDateTime = () => {
 
   return { dayOfMonth, month, year, dayOfWeek, hours, minutes };
 };
+
+export const getWindDirection = (deg) => {
+  const directions = [
+    "&#8593;",
+    "&#8598;",
+    "&#8592;",
+    "&#8601;",
+    "&#8595;",
+    "&#8600;",
+    "&#8594;",
+    "&#8599;",
+  ];
+
+  const i = Math.round(deg / 45) % 8;
+
+  return directions[i];
+};
+
+export const calculateDevPoint = (temp, hum) => {
+  const a = 17.27;
+  const b = 237.7;
+
+  const ft = (a * temp) / (b + temp) + Math.log(hum / 100);
+  const devPoint = (b * ft) / (a - ft);
+
+  return devPoint.toFixed(1);
+};
+
+export const convertPressure = (pressure) => {
+  const mmHg = pressure * (1 / 1.33);
+
+  return mmHg.toFixed(2);
+};
