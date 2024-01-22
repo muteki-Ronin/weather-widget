@@ -37,23 +37,6 @@ export const getCurrentDateTime = () => {
   return { dayOfMonth, month, year, dayOfWeek, hours, minutes };
 };
 
-export const getWindDirection = (deg) => {
-  const directions = [
-    "&#8593;",
-    "&#8598;",
-    "&#8592;",
-    "&#8601;",
-    "&#8595;",
-    "&#8600;",
-    "&#8594;",
-    "&#8599;",
-  ];
-
-  const i = Math.round(deg / 45) % 8;
-
-  return directions[i];
-};
-
 export const calculateDevPoint = (temp, hum) => {
   const a = 17.27;
   const b = 237.7;
@@ -65,16 +48,18 @@ export const calculateDevPoint = (temp, hum) => {
 };
 
 export const convertPressure = (pressure) => {
-  const mmHg = pressure * (1 / 1.33);
+  const mmHg = pressure * 0.750063755419211;
 
   return mmHg.toFixed(2);
 };
 
 export const getWeatherForecastData = (data) => {
+
   const forecast = data.list.filter((item) => {
     return (
       new Date(item.dt_txt).getHours() === 12 &&
-      new Date(item.dt_txt).getDate() > new Date().getDate()
+      new Date(item.dt_txt).getDate() > new Date().getDate() &&
+      new Date(item.dt_txt).getDate() < new Date().getDate() + 5
     );
   });
 
@@ -96,8 +81,10 @@ export const getWeatherForecastData = (data) => {
         if (temp < minTemp) {
           minTemp = temp;
         }
-      } else {
-        maxTemp = temp;
+
+        if (temp > maxTemp) {
+          maxTemp = temp;
+        }
       }
     }
 
@@ -108,5 +95,6 @@ export const getWeatherForecastData = (data) => {
       maxTemp,
     };
   });
+
   return forecastData;
 };
