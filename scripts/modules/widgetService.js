@@ -6,10 +6,11 @@ import {
   showError,
 } from "./render.js";
 
-export const startWidget = async () => {
-  const city = "Киев";
-  const widget = document.createElement("div");
-  widget.classList.add("widget");
+export const startWidget = async (city, widget) => {
+  if (!widget) {
+    widget = document.createElement("div");
+    widget.classList.add("widget");
+  }
 
   const dataWeather = await fetchWeather(city);
 
