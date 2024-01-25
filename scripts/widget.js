@@ -2,8 +2,7 @@ import { cityServiceSearch } from "./modules/cityServiceSearch.js";
 import { startWidget } from "./modules/widgetService.js";
 
 const initWidget = async (app) => {
-  const city = "Киев";
-  const widget = await startWidget(city);
+  const widget = await startWidget();
   app.append(widget);
 
   cityServiceSearch(widget);

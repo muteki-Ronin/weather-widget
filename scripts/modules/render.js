@@ -51,7 +51,9 @@ export const renderWidgetOther = (widget, dataWeather) => {
       <div class="widget__wind">
         <p class="widget__wind-title">Ветер</p>
         <p class="widget__wind-speed">${dataWeather.wind.speed} м/с</p>
-        <p class="widget__wind-text" style="transform: rotate(${dataWeather.wind.deg}deg)">&#8595</p>
+        <p class="widget__wind-text" style="transform: rotate(${
+          dataWeather.wind.deg
+        }deg)">&#8595</p>
       </div>
 
       <div class="widget__humidity">
@@ -84,7 +86,6 @@ export const renderWidgetForecast = (widget, data) => {
 
   const items = forecastData.map((item) => {
     const widgetDayItem = document.createElement("li");
-    console.log("widgetDayItem: ", widgetDayItem);
 
     widgetDayItem.className = "widget__day-item";
     widgetDayItem.insertAdjacentHTML(
@@ -106,6 +107,7 @@ export const renderWidgetForecast = (widget, data) => {
 };
 
 export const showError = (widget, error) => {
+  console.log(error);
   widget.textContent = error.toString();
   widget.classList.add("widget_error");
 };
