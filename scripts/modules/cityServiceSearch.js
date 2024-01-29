@@ -24,5 +24,11 @@ export const cityServiceSearch = (widget) => {
       await startWidget(inputCity.value, widget);
       cityServiceSearch(widget);
     });
+
+    inputCity.addEventListener("keyup", ({ code }) => {
+      if (code === "Escape") {
+        form.remove();
+      }
+    });
   });
 };

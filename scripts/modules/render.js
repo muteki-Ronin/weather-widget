@@ -4,6 +4,7 @@ import {
   getCurrentDateTime,
   getWeatherForecastData,
 } from "./utils.js";
+import { startWidget } from "./widgetService.js";
 
 export const renderWidgetToday = (widget, dataWeather) => {
   const { dayOfMonth, month, year, hours, minutes, dayOfWeek } =
@@ -107,7 +108,17 @@ export const renderWidgetForecast = (widget, data) => {
 };
 
 export const showError = (widget, error) => {
-  console.log(error);
   widget.textContent = error.toString();
   widget.classList.add("widget_error");
+
+  setTimeout(() => {
+    startWidget(null, widget);
+  }, 3000);
+};
+
+export const preload = () => {
+  const preloadDiv = document.createElement("div");
+  preloadDiv.classList.add("widget__preload");
+
+  return preloadDiv;
 };
